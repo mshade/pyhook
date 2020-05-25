@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pyhook
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pyhook
+  name: pyhook
+  namespace: pyhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pyhook
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: pyhook
+    spec:
+      containers:
+      - image: mshade/pyhook:latest
+        name: pyhook
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/conf
+          name: config
+      volumes:
+      - name: config
+        configMap:
+          name: pyhook
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pyhook
+  namespace: pyhook
+spec:
+  selector:
+    app: pyhook
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

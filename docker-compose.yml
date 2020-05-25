@@ -1,0 +1,19 @@
+# for dev
+version: '3.8'
+
+services:
+  flask:
+    image: mshade/pyhook.slim
+    build:
+      context: .
+      target: builder
+    volumes:
+      - ./app:/app
+      - ~/.kube:/kube
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - KUBECONFIG=/kube/config
+    command: ['flask', 'run', '-h', '0.0.0.0']

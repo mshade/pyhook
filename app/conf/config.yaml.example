@@ -1,0 +1,13 @@
+deployments:
+  service1:
+    deploy: servicename
+    image: cool/image1
+    key: xxx
+    ns: service-namespace
+    valid_tag: "^(v[0-9.]+|sha-[a-z0-9]+)"
+  service2:
+    deploy: servicename
+    image: cool/image2
+    key: xxx
+    ns: service2-namespace
+    valid_tag: "^(v[0-9.]+|sha-[a-z0-9]+)"
