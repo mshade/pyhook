@@ -95,4 +95,4 @@ def service_update(path):
     else:
         return "No key or key incorrect.", 403
 
-    return Response(response=result[0], status=result[1])
+    return Response(response=str(result[0]), status=result[1], mimetype="text/plain")
