@@ -7,14 +7,11 @@ rules:
 - apiGroups:
   - apps
   resources:
-  - daemonsets
   - deployments
   verbs:
   - patch
   - update
   - get
-  - watch
-  - list
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
