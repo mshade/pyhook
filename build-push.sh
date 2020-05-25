@@ -1,11 +1,14 @@
 #!/bin/bash
 
-docker build -t mshade/pyhook:latest .
+IMAGE=mshade/pyhook
+SHA=sha-$(git show --oneline -s | awk '{print $1}' )
+docker build -t ${IMAGE}:${SHA} .
+docker tag ${IMAGE}:${SHA} ${IMAGE}:latest
 
 if [ ! -z "$1" ]; then
-  docker build -t mshade/pyhook:${1} .
-  docker push mshade/pyhook:${1}
+  docker build -t ${IMAGE}:${1} .
+  docker push ${IMAGE}:${1}
 fi
 
-docker push mshade/pyhook:latest
-
+docker push ${IMAGE}:${SHA}
+docker push ${IMAGE}:latest
