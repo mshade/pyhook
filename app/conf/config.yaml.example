@@ -1,13 +1,14 @@
 deployments:
-  service1:
-    deploy: servicename
+  # List valid deployments to update. These are your webhook endpoints: /myapp?key=xxx etc
+  myapp:
+    deploy: deploymentname
     image: cool/image1
     key: xxx
-    ns: service-namespace
+    ns: app
     valid_tag: "^(v[0-9.]+|sha-[a-z0-9]+)"
-  service2:
-    deploy: servicename
+  myotherapp:
+    deploy: deploymentname
     image: cool/image2
     key: xxx
-    ns: service2-namespace
+    ns: otherapp
     valid_tag: "^(v[0-9.]+|sha-[a-z0-9]+)"
