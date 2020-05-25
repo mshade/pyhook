@@ -12,7 +12,7 @@ pyhook - a simple Docker Hub webhook handler to update kubernetes deployments wh
 The compose file will attempt to mount a `~/.kube/config` into the container for use; change as necessary.
 
 Browsing to http://localhost:5000/appname?key=yourkey will now report the deployment's current image and tag.
-`POST`ing to that URL with a JSON payload with the following format `{'push_data': 'tag': 'newtag'}` will attempt to update the deployment with the new tag if it matches your `valid_tag` regex.
+`POST`ing to that URL with a JSON payload with the following format `{'push_data': {'tag': 'newtag'}}` will attempt to update the deployment with the new tag if it matches your `valid_tag` regex.
 
 ## Running pyhook in k8s
 
