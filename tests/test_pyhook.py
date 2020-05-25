@@ -30,8 +30,6 @@ def client():
 with open('./tests/get_deploy.json', mode='r') as f:
   from types import SimpleNamespace as Namespace
   deploy_obj = json.load(f, object_hook=lambda d: Namespace(**d))
-with open('./tests/get_deploy.json', mode='r') as f:
-  deploy_json = json.load(f)
 
 def test_index(client):
   resp = client.get('/')
@@ -47,7 +45,7 @@ def test_deployment_get_without_key(client):
 
 def test_deployment_get_with_key(client):
   with patch('kubernetes.client.AppsV1Api.read_namespaced_deployment') as mock_get:
-    mock_get.return_value = deploy_json
+    mock_get.return_value = deploy_obj
     resp = client.get('/deployment?key=xxx')
   assert "200" in resp.status
 
@@ -60,7 +58,6 @@ def test_deployment_post_with_bad_key(client):
     mock_get.return_value = deploy_obj
     mock_update.return_value = "200 OK"
     resp = client.post('/deployment?key=aaa', json=post_data)
-#    print(deploy_json["spec"])
   assert "403" in resp.status
 
 def test_deployment_post_with_key(client):
@@ -72,7 +69,6 @@ def test_deployment_post_with_key(client):
     mock_get.return_value = deploy_obj
     mock_update.return_value = "200 OK"
     resp = client.post('/deployment?key=xxx', json=post_data)
-#    print(deploy_json["spec"])
   assert "200" in resp.status
 
 def test_deployment_post_with_key_bad_tag(client):
@@ -84,7 +80,6 @@ def test_deployment_post_with_key_bad_tag(client):
     mock_get.return_value = deploy_obj
     mock_update.return_value = "200 OK"
     resp = client.post('/deployment?key=xxx', json=post_data)
-#    print(deploy_json["spec"])
   assert "400" in resp.status
 
 def test_bad_path(client):

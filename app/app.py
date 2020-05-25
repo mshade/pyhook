@@ -53,7 +53,11 @@ def get_or_update_deploy(request, my_deploy):
         return f"Exception: {e}", 500
 
     if request.method == "GET":
-        result = deployment
+        result = {
+            "deployment": deployment.metadata.name,
+            "namespace": deployment.metadata.namespace,
+            "image": deployment.spec.template.spec.containers[0].image,
+        }
 
     if request.method == "POST":
         try:
