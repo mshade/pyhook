@@ -3,7 +3,6 @@ version: '3.8'
 
 services:
   flask:
-    image: mshade/pyhook.slim
     build:
       context: .
       target: builder

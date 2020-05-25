@@ -8,7 +8,7 @@ docker build -t ${IMAGE}:${SHA} .
 docker tag ${IMAGE}:${SHA} ${IMAGE}:latest
 
 if [ ! -z "$1" ]; then
-  docker tag ${IMAGE}:${SHA} ${IMAGE}:${1} .
+  docker tag ${IMAGE}:${SHA} ${IMAGE}:${1}
   docker push ${IMAGE}:${1}
 fi
 
